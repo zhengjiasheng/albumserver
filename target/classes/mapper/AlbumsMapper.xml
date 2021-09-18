@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mukun.albumserver.dao.AlbumsMapper">
+    <!--//查询全部相册-->
+    <!--List<Albums> findAllAllbums();-->
+    <select id="findAllAllbums" resultType="Albums">
+        select * from albums order by abl_date desc
+    </select>
+
+    <!--//查询一个相册（通过相册id）-->
+    <!--Albums findOneAlbum(int alb_id);-->
+    <select id="findOneAlbum" parameterType="int" resultType="Albums">
+        select * from albums where alb_id=#{alb_id}
+    </select>
+
+    <!--//修改相册封面图片（default_picture)-->
+    <!--void updateAlbum(Pictures picture);-->
+    <update id="updateAlbum" parameterType="Pictures">
+        update albums set default_picture=#{pic_name} where alb_id=#{album_id}
+    </update>
+
+    <!--    //添加相册
+    void addAlbum(Albums albums);-->
+    <insert id="addAlbum" parameterType="Albums">
+        insert into albums(alb_name, default_picture, abl_date)
+        values (#{alb_name},#{default_picture},#{abl_date})
+    </insert>
+
+    <!--    //删除相册
+    void deleteAlbum(int alb_id);-->
+    <delete id="deleteAlbum" parameterType="int">
+        delete from albums where alb_id=#{alb_id}
+    </delete>
+</mapper>

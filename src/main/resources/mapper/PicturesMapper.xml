@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mukun.albumserver.dao.PicturesMapper">
+    <!--    //查询一个相册的全部图片
+    List<Pictures> findPictures(int alb_id);-->
+    <select id="findPictures" parameterType="int" resultType="Pictures">
+        select * from pictures where album_id=#{alb_id} order by pic_date desc
+    </select>
+
+    <!--    //查询一张图片
+    Pictures findOnePicture(int pic_id);-->
+    <select id="findOnePicture" parameterType="int" resultType="Pictures">
+        select * from pictures where pic_id=#{pic_id}
+    </select>
+
+    <!--    //上传图片
+    void addPicture(Pictures picture);-->
+    <insert id="addPicture" parameterType="Pictures">
+        insert into pictures(pic_name, pic_date, album_id)
+        values (#{pic_name},#{pic_date},#{album_id})
+    </insert>
+
+    <!--    //删除图片
+    void deletePicture(int pic_id);-->
+    <delete id="deletePicture" parameterType="int">
+        delete from pictures where pic_id=#{pic_id}
+    </delete>
+</mapper>
